@@ -118,10 +118,7 @@ func TestMiddlewareNoMethodEnabled(t *testing.T) {
 func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	signature := ""
 	router := New()
-
-	// NoMethod disabled
 	router.HandleMethodNotAllowed = false
-
 	router.Use(func(c *Context) {
 		signature += "A"
 		c.Next()
@@ -147,7 +144,6 @@ func TestMiddlewareNoMethodDisabled(t *testing.T) {
 	router.POST("/", func(c *Context) {
 		signature += " XX "
 	})
-
 	// RUN
 	w := performRequest(router, "GET", "/")
 

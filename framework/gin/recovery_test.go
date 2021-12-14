@@ -92,14 +92,14 @@ func TestPanicWithAbort(t *testing.T) {
 
 func TestSource(t *testing.T) {
 	bs := source(nil, 0)
-	assert.Equal(t, dunno, bs)
+	assert.Equal(t, []byte("???"), bs)
 
 	in := [][]byte{
 		[]byte("Hello world."),
 		[]byte("Hi, gin.."),
 	}
 	bs = source(in, 10)
-	assert.Equal(t, dunno, bs)
+	assert.Equal(t, []byte("???"), bs)
 
 	bs = source(in, 1)
 	assert.Equal(t, []byte("Hello world."), bs)
@@ -107,7 +107,7 @@ func TestSource(t *testing.T) {
 
 func TestFunction(t *testing.T) {
 	bs := function(1)
-	assert.Equal(t, dunno, bs)
+	assert.Equal(t, []byte("???"), bs)
 }
 
 // TestPanicWithBrokenPipe asserts that recovery specifically handles

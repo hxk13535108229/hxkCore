@@ -360,9 +360,7 @@ func TestRouterMiddlewareAndStatic(t *testing.T) {
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.Contains(t, w.Body.String(), "package gin")
-	// Content-Type='text/plain; charset=utf-8' when go version <= 1.16,
-	// else, Content-Type='text/x-go; charset=utf-8'
-	assert.NotEqual(t, "", w.Header().Get("Content-Type"))
+	assert.Equal(t, "text/plain; charset=utf-8", w.Header().Get("Content-Type"))
 	assert.NotEqual(t, w.Header().Get("Last-Modified"), "Mon, 02 Jan 2006 15:04:05 MST")
 	assert.Equal(t, "Mon, 02 Jan 2006 15:04:05 MST", w.Header().Get("Expires"))
 	assert.Equal(t, "Gin Framework", w.Header().Get("x-GIN"))
@@ -481,21 +479,6 @@ func TestRouterNotFound(t *testing.T) {
 	router.GET("/a", func(c *Context) {})
 	w = performRequest(router, http.MethodGet, "/")
 	assert.Equal(t, http.StatusNotFound, w.Code)
-
-	// Reproduction test for the bug of issue #2843
-	router = New()
-	router.NoRoute(func(c *Context) {
-		if c.Request.RequestURI == "/login" {
-			c.String(200, "login")
-		}
-	})
-	router.GET("/logout", func(c *Context) {
-		c.String(200, "logout")
-	})
-	w = performRequest(router, http.MethodGet, "/login")
-	assert.Equal(t, "login", w.Body.String())
-	w = performRequest(router, http.MethodGet, "/logout")
-	assert.Equal(t, "logout", w.Body.String())
 }
 
 func TestRouterStaticFSNotFound(t *testing.T) {

@@ -1,7 +1,11 @@
+// Copyright 2021 jianfengye.  All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
 package main
 
 import (
 	"context"
+	"github.com/gohxk/hxk/framework/provider/app"
 	"log"
 	"net/http"
 	"os"
@@ -9,17 +13,24 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gohxk/hxk/framework"
+	hadeHttp "github.com/gohxk/hxk/app/http"
+	"github.com/gohxk/hxk/app/provider/demo"
+	"github.com/gohxk/hxk/framework/gin"
 	"github.com/gohxk/hxk/framework/middleware"
 )
 
 func main() {
-	core := framework.NewCore()
+	// 创建engine结构
+	core := gin.New()
+	// 绑定具体的服务
+	core.Bind(&app.HadeAppProvider{})
+	core.Bind(&demo.DemoProvider{})
 
-	core.Use(middleware.Recovery())
+	core.Use(gin.Recovery())
 	core.Use(middleware.Cost())
 
-	registerRouter(core)
+	hadeHttp.Routes(core)
+
 	server := &http.Server{
 		Handler: core,
 		Addr:    ":8888",

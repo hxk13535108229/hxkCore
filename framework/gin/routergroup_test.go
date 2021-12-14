@@ -1,4 +1,5 @@
 // Copyright 2014 Manu Martinez-Almeida.  All rights reserved.
+
 // Use of this source code is governed by a MIT style
 // license that can be found in the LICENSE file.
 
@@ -112,19 +113,15 @@ func TestRouterGroupInvalidStaticFile(t *testing.T) {
 }
 
 func TestRouterGroupTooManyHandlers(t *testing.T) {
-	const (
-		panicValue = "too many handlers"
-		maximumCnt = abortIndex
-	)
 	router := New()
-	handlers1 := make([]HandlerFunc, maximumCnt-1)
+	handlers1 := make([]HandlerFunc, 40)
 	router.Use(handlers1...)
 
-	handlers2 := make([]HandlerFunc, maximumCnt+1)
-	assert.PanicsWithValue(t, panicValue, func() {
+	handlers2 := make([]HandlerFunc, 26)
+	assert.Panics(t, func() {
 		router.Use(handlers2...)
 	})
-	assert.PanicsWithValue(t, panicValue, func() {
+	assert.Panics(t, func() {
 		router.GET("/", handlers2...)
 	})
 }

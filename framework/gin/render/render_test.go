@@ -14,9 +14,10 @@ import (
 	"strings"
 	"testing"
 
-	testdata "github.com/gohxk/hxk/framework/gin/testdata/protoexample"
+	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/protobuf/proto"
+
+	testdata "github.com/gohxk/hxk/framework/gin/testdata/protoexample"
 )
 
 // TODO unit tests
@@ -419,8 +420,7 @@ func TestRenderHTMLTemplateEmptyName(t *testing.T) {
 
 func TestRenderHTMLDebugFiles(t *testing.T) {
 	w := httptest.NewRecorder()
-	htmlRender := HTMLDebug{
-		Files:   []string{"../testdata/template/hello.tmpl"},
+	htmlRender := HTMLDebug{Files: []string{"../testdata/template/hello.tmpl"},
 		Glob:    "",
 		Delims:  Delims{Left: "{[{", Right: "}]}"},
 		FuncMap: nil,
@@ -438,8 +438,7 @@ func TestRenderHTMLDebugFiles(t *testing.T) {
 
 func TestRenderHTMLDebugGlob(t *testing.T) {
 	w := httptest.NewRecorder()
-	htmlRender := HTMLDebug{
-		Files:   nil,
+	htmlRender := HTMLDebug{Files: nil,
 		Glob:    "../testdata/template/hello*",
 		Delims:  Delims{Left: "{[{", Right: "}]}"},
 		FuncMap: nil,
@@ -456,8 +455,7 @@ func TestRenderHTMLDebugGlob(t *testing.T) {
 }
 
 func TestRenderHTMLDebugPanics(t *testing.T) {
-	htmlRender := HTMLDebug{
-		Files:   nil,
+	htmlRender := HTMLDebug{Files: nil,
 		Glob:    "",
 		Delims:  Delims{"{{", "}}"},
 		FuncMap: nil,

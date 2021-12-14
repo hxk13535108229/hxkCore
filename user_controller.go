@@ -1,8 +1,9 @@
 package main
 
 import (
-	"coredemo/framework"
 	"time"
+
+	"github.com/gohxk/hxk/framework"
 )
 
 func UserLoginController(c *framework.Context) error {

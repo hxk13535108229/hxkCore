@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"coredemo/framework"
 	"fmt"
 	"log"
 	"time"
+
+	"github.com/gohxk/hxk/framework"
 )
 
 func FooControllerHandler(c *framework.Context) error {

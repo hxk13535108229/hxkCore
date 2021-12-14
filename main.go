@@ -2,14 +2,15 @@ package main
 
 import (
 	"context"
-	"coredemo/framework"
-	"coredemo/framework/middleware"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/gohxk/hxk/framework"
+	"github.com/gohxk/hxk/framework/middleware"
 )
 
 func main() {

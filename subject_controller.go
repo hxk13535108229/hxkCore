@@ -1,8 +1,9 @@
 package main
 
 import (
-	"coredemo/framework"
 	"fmt"
+
+	"github.com/gohxk/hxk/framework"
 )
 
 func SubjectAddController(c *framework.Context) error {

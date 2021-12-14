@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"coredemo/framework"
 	"log"
 	"time"
+
+	"github.com/gohxk/hxk/framework"
 )
 
 // recovery机制，将协程中的函数异常进行捕获

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"coredemo/framework"
-	"coredemo/framework/middleware"
+	"github.com/gohxk/hxk/framework"
+	"github.com/gohxk/hxk/framework/middleware"
 )
 
 // 注册路由规则
